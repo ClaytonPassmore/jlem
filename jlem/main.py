@@ -10,8 +10,18 @@ COMMANDS = [
     'enable',
     'disable',
     'status',
-    'ls'
+    'ls',
+    'help'
 ]
+COMMAND_DESCRIPTIONS = {
+    'install': 'install an extension from pypi',
+    'uninstall': 'uninstall an extension',
+    'enable': 'enable an extension',
+    'disable': 'disable an extension',
+    'status': 'display the current state of local extensions',
+    'ls': 'list available extensions on pypi',
+    'help': 'display descriptions for specific commands'
+}
 
 
 def command_type(value):
@@ -53,6 +63,13 @@ def main():
         return status()
     elif command == 'ls':
         return ls()
+    elif command == 'help':
+        opts = ArgumentParser(usage='%(prog)s help command')
+        opts.add_argument('command', type=command_type)
+        sub_args = opts.parse_args(options)
+        cmd = sub_args.command
+        print('{} - {}'.format(cmd, COMMAND_DESCRIPTIONS[cmd]))
+        return 0
     else:
         raise Exception('Somebody forgot to update some code')
 
