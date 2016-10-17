@@ -7,4 +7,4 @@ setup(name='jlem',
       entry_points = {
           'console_scripts': ['jlem=jlem.main:main']
       },
-      install_requires=['jupyterlab'])
+      install_requires=['jupyterlab', 'pip'])
